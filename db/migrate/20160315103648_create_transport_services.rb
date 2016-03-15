@@ -3,7 +3,7 @@ class CreateTransportServices < ActiveRecord::Migration
     create_table :transport_services do |t|
       t.string :name
       t.string :email
-      t.int :phone
+      t.integer :phone
 
       t.timestamps null: false
     end

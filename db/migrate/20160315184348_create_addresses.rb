@@ -3,7 +3,7 @@ class CreateAddresses < ActiveRecord::Migration
     create_table :addresses do |t|
       t.string :street
       t.string :town
-      t.int :zip
+      t.integer :zip
 
       t.timestamps null: false
     end
