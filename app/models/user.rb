@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-  has_one :operator
+  belongs_to :operator
+  belongs_to :client
   enum role: [:user, :vip, :admin]
   after_initialize :set_default_role, if: :new_record?
 

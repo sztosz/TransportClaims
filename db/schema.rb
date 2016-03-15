@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160315185024) do
+ActiveRecord::Schema.define(version: 20160315192110) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,13 @@ ActiveRecord::Schema.define(version: 20160315185024) do
     t.string   "street"
     t.string   "town"
     t.integer  "zip"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "clients", force: :cascade do |t|
+    t.integer  "phone"
+    t.string   "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -34,12 +41,9 @@ ActiveRecord::Schema.define(version: 20160315185024) do
     t.string   "name"
     t.integer  "phone"
     t.string   "email"
-    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-  add_index "operators", ["user_id"], name: "index_operators_on_user_id", using: :btree
 
   create_table "statuses", force: :cascade do |t|
     t.string   "name"
@@ -70,10 +74,13 @@ ActiveRecord::Schema.define(version: 20160315185024) do
     t.datetime "updated_at",                          null: false
     t.string   "name"
     t.integer  "role"
+    t.integer  "operator_id"
+    t.integer  "client_id"
   end
 
+  add_index "users", ["client_id"], name: "index_users_on_client_id", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["operator_id"], name: "index_users_on_operator_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "operators", "users"
 end

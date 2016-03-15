@@ -4,7 +4,6 @@ class CreateOperators < ActiveRecord::Migration
       t.string :name
       t.integer :phone
       t.string :email
-      t.belongs_to :user, index: true, foreign_key: true
 
       t.timestamps null: false
     end
