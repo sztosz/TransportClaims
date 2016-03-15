@@ -1,5 +1,6 @@
 class Client < ActiveRecord::Base
   has_many :users
+  has_many :claims
   has_one :address
   validates :phone, :email, presence: true
   validates :phone, numericality: { only_integer: true, greater_than: 0, less_than: 999_999_999 }
