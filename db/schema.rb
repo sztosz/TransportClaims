@@ -11,13 +11,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160315102245) do
+ActiveRecord::Schema.define(version: 20160315185024) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "addresses", force: :cascade do |t|
+    t.string   "street"
+    t.string   "town"
+    t.integer  "zip"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "operators", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "phone"
+    t.string   "email"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "operators", ["user_id"], name: "index_operators_on_user_id", using: :btree
+
   create_table "statuses", force: :cascade do |t|
     t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "transport_services", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.integer  "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -42,4 +75,5 @@ ActiveRecord::Schema.define(version: 20160315102245) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "operators", "users"
 end
