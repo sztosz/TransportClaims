@@ -1,0 +1,23 @@
+- if policy(@statuses).create?
+  .row.col-md-12
+    = link_to :new, admin_new_status_path, { class: 'btn btn-primary' }
+
+.row.col-md-12
+  table.table.table-striped.table-hover
+    thead
+      tr
+        th ID
+        th Name
+        - if policy(@brands).edit?
+          th Edit
+        - if policy(@brands).destroy?
+          th Remove
+    tbody
+      - for status in @statuses do
+        tr
+          td = status.id
+          td = status.name
+          - if policy(@statuses).edit?
+            td = link_to :Edit, admin_edit_status_path(brand), class: 'btn btn-primary'
+          - if policy(@statuses).destroy?
+            td = link_to :Remove, admin_status_path(brand), method: :delete, class: 'btn btn-danger'
