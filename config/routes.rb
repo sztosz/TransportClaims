@@ -3,6 +3,6 @@ Rails.application.routes.draw do
   devise_for :users
 
   namespace :admin do
-    resources :status
+    resources :statuses, except: :show
   end
 end

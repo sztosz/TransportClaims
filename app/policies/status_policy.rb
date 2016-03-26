@@ -1,0 +1,2 @@
+class StatusPolicy < AdminPolicy
+end
